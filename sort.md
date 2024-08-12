@@ -75,3 +75,66 @@ public class Main {
 }
 
 ```
+
+### Heap Sort
+```java
+import java.util.Arrays;
+
+public class Heap {
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{1,3,5,7,9,2,4,6,8};
+        sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    private static void sort(int[] arr){
+        int n = arr.length -1;
+
+         build(arr,n);
+         for (int i=arr.length-1; i > 0;i--){
+             int temp = arr[0];
+             arr[0] = arr[i];
+             arr[i] = temp;
+
+             n--;
+             maxHeapify(arr,0,n);
+         }
+    }
+
+
+
+    private static void maxHeapify(int[] arr, int i, int n){
+        int l = left(i);
+        int r = right(i);
+        int largest;
+
+        if(l <= n && arr[l] > arr[i]) largest = l;
+        else largest = i;
+
+        if(r <= n && arr[r] > arr[largest]) largest = r;
+
+        if(largest != i){
+            int temp = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = temp;
+
+
+            maxHeapify(arr,largest,n);
+        }System.out.println(Arrays.toString(arr));
+    }
+
+    private static void build(int[] arr,int n){
+        for(int i=n / 2; i >= 0 ;i--){
+            maxHeapify(arr,i, n);
+        }
+    }
+    private static int left(int i){
+        return 2 * i;
+    }
+
+    private static int right(int i){
+        return (2 * i) + 1;
+    }
+}
+```
