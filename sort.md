@@ -102,8 +102,6 @@ public class Heap {
          }
     }
 
-
-
     private static void maxHeapify(int[] arr, int i, int n){
         int l = left(i);
         int r = right(i);
@@ -121,7 +119,7 @@ public class Heap {
 
 
             maxHeapify(arr,largest,n);
-        }System.out.println(Arrays.toString(arr));
+        }
     }
 
     private static void build(int[] arr,int n){
@@ -137,4 +135,45 @@ public class Heap {
         return (2 * i) + 1;
     }
 }
+```
+### Quick Sort
+```java
+import java.util.*;
+
+public class Quicksort {
+    public static void main(String[] args) {
+        int[] arr = new int[]{1,3,5,7,9,2,4,6,8,10};
+        sort(arr,0,arr.length-1);
+        System.out.println(Arrays.toString(arr));
+    }
+    private static void sort(int[] arr,int start, int end){
+
+        if(start < end){
+            int mid = partition(arr,start,end);
+            sort(arr,start,mid-1);
+            sort(arr,mid,end);
+        }
+    }
+
+    private static int partition(int[] arr, int start, int end){
+        int i = start -1;
+        for(int j=start;j<end;j++){
+            if(arr[j] <= arr[end]){
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+
+        }
+
+        int temp = arr[i+1];
+        arr[i+1] = arr[end];
+        arr[end] = temp;
+
+        return i+1;
+
+    }
+}
+
 ```
