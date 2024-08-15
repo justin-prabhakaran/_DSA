@@ -177,3 +177,38 @@ public class Quicksort {
 }
 
 ```
+### Counting Sort
+```java
+import java.util.Arrays;
+
+public class Counting {
+    public static void main(String[] args) {
+        int[] arr = new int[]{1,3,5,7,9,2,4,6,8,10};
+        sort(arr,arr.length);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    private static void sort(int[] arr, int n){
+        int[] res = new int[n];
+        int max = Arrays.stream(arr).max().orElse(1);
+        int[] count = new int[max+1];
+
+        for(int i : arr){
+            count[i]++;
+        }
+
+        for(int i=1;i<count.length;i++){
+            count[i] += count[i-1];
+        }
+
+        for(int i=n-1;i>=0;i--){
+            res[count[arr[i]] - 1] = arr[i];
+            --count[arr[i]];
+
+        }
+
+        System.arraycopy(res, 0, arr, 0, n);
+    }
+
+}
+```
